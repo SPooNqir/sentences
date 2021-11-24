@@ -1,0 +1,979 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Spoon - Sentences WS",
+    "version": "0.0.1",
+    "contact": {
+      "name": "Spoon Cloud Team",
+      "url": "https://gitlab.com/SpoonQIR/Cloud/services/sentences",
+      "email": "sebastien.lavayssiere@spoon.ai"
+    }
+  },
+  "tags": [
+    {
+      "name": "sentences"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/sentences": {
+      "get": {
+        "operationId": "sentences_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sentencesSentences"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "418": {
+            "description": "I'm a teapot.",
+            "schema": {
+              "$ref": ".grpc.gateway.examples.internal.proto.examplepb.NumericEnum"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "max",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "sentences"
+        ]
+      },
+      "post": {
+        "operationId": "sentences_Add",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sentencesSentence"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "418": {
+            "description": "I'm a teapot.",
+            "schema": {
+              "$ref": ".grpc.gateway.examples.internal.proto.examplepb.NumericEnum"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sentencesSentence"
+            }
+          }
+        ],
+        "tags": [
+          "sentences"
+        ]
+      }
+    },
+    "/v1/sentences/groups": {
+      "post": {
+        "operationId": "sentences_AddSentenceGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sentencesSentence"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "418": {
+            "description": "I'm a teapot.",
+            "schema": {
+              "$ref": ".grpc.gateway.examples.internal.proto.examplepb.NumericEnum"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sentencesSentenceGroup"
+            }
+          }
+        ],
+        "tags": [
+          "sentences"
+        ]
+      }
+    },
+    "/v1/sentences/id/{id}": {
+      "get": {
+        "operationId": "sentences_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sentencesSentence"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "418": {
+            "description": "I'm a teapot.",
+            "schema": {
+              "$ref": ".grpc.gateway.examples.internal.proto.examplepb.NumericEnum"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "@inject_tag: gorm:\"-\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "ask",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "resp",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "createDate",
+            "description": "@inject_tag: gorm:\"-\".",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "createFrom",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "sentences"
+        ]
+      }
+    },
+    "/v1/sentences/id/{sentenceid}/group/{groupid}": {
+      "delete": {
+        "operationId": "sentences_DeleteSentenceGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sentencesSentence"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "418": {
+            "description": "I'm a teapot.",
+            "schema": {
+              "$ref": ".grpc.gateway.examples.internal.proto.examplepb.NumericEnum"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sentenceid",
+            "description": "@inject_tag: gorm:\"index:sentenceid\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "groupid",
+            "description": "@inject_tag: gorm:\"index:groupid\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "id",
+            "description": "@inject_tag: gorm:\"-\".",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "moderate",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "group.id",
+            "description": "@inject_tag: gorm:\"-\".",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "group.name",
+            "description": "@inject_tag: gorm:\"unique;not null\".",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "group.label",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "group.paths",
+            "description": "@inject_tag: gorm:\"-\".",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "moderator",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "used",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "good",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "bad",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "localisation",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "privacy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "sentences"
+        ]
+      }
+    },
+    "/v1/sentences/id/{sentenceid}/group/{groupid}/enabled/{enabled}": {
+      "put": {
+        "operationId": "sentences_Moderate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sentencesSentence"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "418": {
+            "description": "I'm a teapot.",
+            "schema": {
+              "$ref": ".grpc.gateway.examples.internal.proto.examplepb.NumericEnum"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sentenceid",
+            "description": "@inject_tag: gorm:\"index:sentenceid\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "groupid",
+            "description": "@inject_tag: gorm:\"index:groupid\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "enabled",
+            "in": "path",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "sentences"
+        ]
+      }
+    },
+    "/v1/sentences/id/{sentenceid}/group/{groupid}/used": {
+      "put": {
+        "operationId": "sentences_Used",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sentencesSentence"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "418": {
+            "description": "I'm a teapot.",
+            "schema": {
+              "$ref": ".grpc.gateway.examples.internal.proto.examplepb.NumericEnum"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sentenceid",
+            "description": "@inject_tag: gorm:\"index:sentenceid\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "groupid",
+            "description": "@inject_tag: gorm:\"index:groupid\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "sentences"
+        ]
+      }
+    },
+    "/v1/sentences/id/{sentenceid}/group/{groupid}/vote/bad": {
+      "put": {
+        "operationId": "sentences_VoteBad",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sentencesSentence"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "418": {
+            "description": "I'm a teapot.",
+            "schema": {
+              "$ref": ".grpc.gateway.examples.internal.proto.examplepb.NumericEnum"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sentenceid",
+            "description": "@inject_tag: gorm:\"index:sentenceid\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "groupid",
+            "description": "@inject_tag: gorm:\"index:groupid\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "sentences"
+        ]
+      }
+    },
+    "/v1/sentences/id/{sentenceid}/group/{groupid}/vote/good": {
+      "put": {
+        "operationId": "sentences_VoteGood",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sentencesSentence"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "418": {
+            "description": "I'm a teapot.",
+            "schema": {
+              "$ref": ".grpc.gateway.examples.internal.proto.examplepb.NumericEnum"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sentenceid",
+            "description": "@inject_tag: gorm:\"index:sentenceid\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "groupid",
+            "description": "@inject_tag: gorm:\"index:groupid\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "sentences"
+        ]
+      }
+    },
+    "/v1/sentences/lang/{lang}/ask/{ask}": {
+      "get": {
+        "operationId": "sentences_GetResponse",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sentencesSentence"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "418": {
+            "description": "I'm a teapot.",
+            "schema": {
+              "$ref": ".grpc.gateway.examples.internal.proto.examplepb.NumericEnum"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ask",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "description": "@inject_tag: gorm:\"-\".",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "resp",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "createDate",
+            "description": "@inject_tag: gorm:\"-\".",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "createFrom",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "sentences"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "groupsGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "@inject_tag: gorm:\"-\""
+        },
+        "name": {
+          "type": "string",
+          "title": "@inject_tag: gorm:\"unique;not null\""
+        },
+        "label": {
+          "type": "string"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "@inject_tag: gorm:\"-\""
+        },
+        "parents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/groupsGroup"
+          },
+          "title": "@inject_tag: gorm:\"-\""
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/groupsGroup"
+          },
+          "title": "@inject_tag: gorm:\"-\""
+        },
+        "composed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          },
+          "title": "@inject_tag: gorm:\"-\""
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+        }
+      },
+      "additionalProperties": {},
+      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "sentencesSentence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "@inject_tag: gorm:\"-\""
+        },
+        "ask": {
+          "type": "string"
+        },
+        "resp": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/sentencesSentenceGroup"
+          },
+          "title": "@inject_tag: gorm:\"-\""
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "title": "@inject_tag: gorm:\"-\""
+        },
+        "source": {
+          "type": "string"
+        },
+        "createFrom": {
+          "type": "string"
+        }
+      }
+    },
+    "sentencesSentenceGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "@inject_tag: gorm:\"-\""
+        },
+        "sentenceid": {
+          "type": "string",
+          "format": "uint64",
+          "title": "@inject_tag: gorm:\"index:sentenceid\""
+        },
+        "moderate": {
+          "type": "boolean"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "groupid": {
+          "type": "string",
+          "format": "uint64",
+          "title": "@inject_tag: gorm:\"index:groupid\""
+        },
+        "group": {
+          "$ref": "#/definitions/groupsGroup",
+          "title": "@inject_tag: gorm:\"-\""
+        },
+        "moderator": {
+          "type": "string"
+        },
+        "used": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "good": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "bad": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "localisation": {
+          "type": "string"
+        },
+        "privacy": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "sentencesSentences": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/sentencesSentence"
+          }
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "max": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "externalDocs": {
+    "description": "link for docs",
+    "url": "https://gitlab.com/SpoonQIR/Cloud/services/sentences"
+  }
+}
