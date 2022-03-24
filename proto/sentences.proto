@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package sentences;
 
-option go_package = "github.com/slavayssiere-spoon/sentences";
+option go_package = "github.com/SPooNqir/sentences";
 
 import "google/api/annotations.proto";
 // import "google/protobuf/empty.proto";
